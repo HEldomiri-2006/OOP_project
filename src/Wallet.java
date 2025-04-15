@@ -23,7 +23,7 @@ public class Wallet {
         this.balance-=price;
         paid = true;
         }
-        System.out.println("hello this is hossam trying to connect to github 3");
+
     }
 
 }
