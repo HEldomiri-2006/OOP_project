@@ -23,7 +23,7 @@ public class Wallet {
         this.balance-=price;
         paid = true;
         }
-        System.out.println("fhsidisi");
+        System.out.println("fhsidisi111");
     }
 
 }
