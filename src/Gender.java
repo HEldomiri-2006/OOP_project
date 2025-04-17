@@ -1,9 +1,6 @@
 public enum Gender {
     MALE("Male"),
-    FEMALE("Female"),
-    NON_BINARY("Non-binary"),
-    PREFER_NOT_TO_SAY("Prefer not to say"),
-    OTHER("Other");
+    FEMALE("Female");
 
     private final String displayName;
 
