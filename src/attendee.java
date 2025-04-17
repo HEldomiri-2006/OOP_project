@@ -1,9 +1,7 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Attendee extends Account {
+public class attendee extends User {
     private String address;
     private int balance;
     private String gender;
@@ -11,9 +9,9 @@ public class Attendee extends Account {
     public boolean isAttending = false;
     private Scanner scanner = new Scanner(System.in);
 
-    public Attendee() {}
+    public attendee() {}
 
-    public Attendee(String username, String password, Date dateofBirth, String role,
+    public attendee(String username, String password, Date dateofBirth, String role,
                     String address, int balance, String gender, String interests, Wallet wallet) {
         super(username, password, dateofBirth, role, wallet);
         this.address = address;

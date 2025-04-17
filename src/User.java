@@ -3,17 +3,17 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
-public abstract class Account {
+public abstract class User {
     private String username;
     private String password;  // also fixed 'Password' to lowercase (Java naming convention)
     private Date dateOfBirth;
     private String role;
     protected Wallet wallet;
 
-    public Account() {
+    public User() {
     }
 
-    public Account(String username, String password, Date dateofBirth, String role,Wallet wallet) {
+    public User(String username, String password, Date dateofBirth, String role,Wallet wallet) {
         this.username = username;
         this.password = password;
         this.dateOfBirth = dateofBirth;
@@ -71,7 +71,8 @@ public abstract class Account {
             System.out.print("Are you an attendee, admin, or organizer? ");
             role = scanner.nextLine().toLowerCase();
 
-            while (!role.equals("attendee") && !role.equals("admin") && !role.equals("organizer")) {
+            while (!role.equals("attendee") && !role.equals("admin") && !role.equals("organizer")) //if the user enters another role
+            {
                 System.out.print("Invalid role. Please enter attendee, admin, or organizer: ");
                 role = scanner.nextLine().toLowerCase();
             }
