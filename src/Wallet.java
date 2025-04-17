@@ -23,8 +23,7 @@ public class Wallet {
         this.balance-=price;
         paid = true;
         }
-        System.out.println("git clone https://github.com/HEldomiri-2006/OOP_project.git\n" +
-                "cd OOP_project");
+
     }
 
 }

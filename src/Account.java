@@ -8,15 +8,17 @@ public abstract class Account {
     private String password;  // also fixed 'Password' to lowercase (Java naming convention)
     private Date dateOfBirth;
     private String role;
+    protected Wallet wallet;
 
     public Account() {
     }
 
-    public Account(String username, String password, Date dateofBirth, String role) {
+    public Account(String username, String password, Date dateofBirth, String role,Wallet wallet) {
         this.username = username;
         this.password = password;
         this.dateOfBirth = dateofBirth;
         this.role = role;
+        this.wallet=wallet;
     }
 
     public String getUsername() {
