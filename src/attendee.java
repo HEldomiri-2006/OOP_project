@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -8,16 +10,18 @@ public class attendee extends User {
     private String interests;
     public boolean isAttending = false;
     private Scanner scanner = new Scanner(System.in);
+    protected Wallet wallet;
 
     public attendee() {}
 
     public attendee(String username, String password, Date dateofBirth, String role,
                     String address, int balance,  Gender gender, String interests, Wallet wallet) {
-        super(username, password, dateofBirth, role, wallet);
+        super(username, password, dateofBirth, role);
         this.address = address;
         this.balance = balance;
         this.gender = gender;
         this.interests = interests;
+        this.wallet=wallet;
     }
 
 
@@ -37,6 +41,7 @@ public class attendee extends User {
             // Recursively call until valid response
             attendEvent();
         }
+
     }
     public void buyTickets(int ticketPrice ) {
         wallet.pay(ticketPrice);
