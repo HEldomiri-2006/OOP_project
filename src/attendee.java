@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class attendee extends User {
     private String address;
     private int balance;
-    private String gender;
+    private Gender gender;
     private String interests;
     public boolean isAttending = false;
     private Scanner scanner = new Scanner(System.in);
@@ -12,7 +12,7 @@ public class attendee extends User {
     public attendee() {}
 
     public attendee(String username, String password, Date dateofBirth, String role,
-                    String address, int balance, String gender, String interests, Wallet wallet) {
+                    String address, int balance,  Gender gender, String interests, Wallet wallet) {
         super(username, password, dateofBirth, role, wallet);
         this.address = address;
         this.balance = balance;
@@ -59,11 +59,11 @@ public class attendee extends User {
         this.balance = balance;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
