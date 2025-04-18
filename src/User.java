@@ -1,91 +1,48 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Scanner;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
-public abstract class User {
-    private String username;
-    private String password;  // also fixed 'Password' to lowercase (Java naming convention)
-    private Date dateOfBirth;
-    private String role;
-    ;
+public abstract class  User {
+    protected String name;
+    protected  String phonenumber;
+    protected String email;
+    protected LocalDate Dateofbirth;
+
 
     public User() {
     }
 
-    public User(String username, String password, Date dateofBirth, String role) {
-        this.username = username;
-        this.password = password;
-        this.dateOfBirth = dateofBirth;
-        this.role = role;
-
+    public User(String name) {
+        this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public User(String name, String phonenumber, String email, LocalDate DateofBirth) {
+        this.name = name;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.Dateofbirth=DateofBirth;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getEmail() {
+        return email;
     }
+    public abstract void menu();
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
+    /*addRoom(roomID: int, roomCapacity: int, price: int): void
+ +addCategories(categoryName: String): void
+ +deleteCategories(categoryName: String): void
+ +editCategories(old_categoryName: String, new_categoryName: String): void
+ +view_allRooms(): List<Rooms>
+ +view_allEvents():  List<Events>
+ +view_allAttendees():  List<Attendees>
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void signup() {
-        Scanner scanner = new Scanner(System.in);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            System.out.print("Enter username: ");
-            username = scanner.nextLine();
-
-            System.out.print("Enter password: ");
-            password = scanner.nextLine();
-
-            System.out.print("Enter date of birth (yyyy-MM-dd): ");
-            String dobInput = scanner.nextLine();
-            dateOfBirth = dateFormat.parse(dobInput);
-
-            System.out.print("Are you an attendee, admin, or organizer? ");
-            role = scanner.nextLine().toLowerCase();
-
-            while (!role.equals("attendee") && !role.equals("admin") && !role.equals("organizer")) //if the user enters another role
-            {
-                System.out.print("Invalid role. Please enter attendee, admin, or organizer: ");
-                role = scanner.nextLine().toLowerCase();
-            }
-
-            System.out.println("\nSignup successful!");
-            System.out.println("Username: " + username);
-            System.out.println("Role: " + role);
-            System.out.println("Date of Birth: " + dateFormat.format(dateOfBirth));
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
-
-
-        }
-
-    }
+     */
 }
