@@ -37,7 +37,7 @@ public class Main {
         if (n != -1) {
             User user = database.getUser(n);
             System.out.println("welcome " + user.getName());
-            user.menu();
+            user.menu( database , user);
         } else {
             System.out.println("user does not exist");
         }
@@ -63,24 +63,30 @@ public class Main {
 
         System.out.println("1.Admin \n2.Organizer \n3.attendee");
         int role = s.nextInt();
+        User user;
         s.nextLine(); // Consume the newline character
 
         if (role == 1) {
-            User admin = new Admin(name, phonenumber, email,dateOfBirth);
-            database.addUser(admin);
+             user = new Admin(name, phonenumber, email,dateOfBirth);
+
         } else if (role == 2) {
-            User organiser = new Organizer(name, phonenumber, email,dateOfBirth);
-            database.addUser(organiser);
+             user = new Organizer(name, phonenumber, email,dateOfBirth);
+
         } else {
             System.out.println("enter your address:");
             String address = s.nextLine();
+            System.out.println("enter your intersts");
+            String intersts = s.nextLine();
             System.out.println("enter balance");
             Double balance =s.nextDouble();
-            System.out.println("enter your gender");
+            //System.out.println("enter your gender");
 
-            User attendee = new attendee(name, phonenumber, email,dateOfBirth,address,balance); // Fixed class name (attendee -> Attendee)
-            database.addUser(attendee);
+            user = new attendee(name, phonenumber, email,dateOfBirth,address,balance,intersts); // Fixed class name (attendee -> Attendee)
+
         }
+        database.addUser(user);
+        user.menu(database,user);
         System.out.println("user created successfully");
     }
+
 }

@@ -1,13 +1,18 @@
+import java.awt.print.Book;
 import java.util.ArrayList;
 
 public class Database {
     ArrayList <User>users = new ArrayList<User>();
     ArrayList <String> name = new ArrayList<String>();
+    ArrayList <Events> events = new ArrayList<Events>();
+    ArrayList <String> eventName=new ArrayList<String>();
+
 
     public void addUser(User s) {
         users.add(s);
         name.add(s.getName());
     }
+
 
     public int login(String phonenumber , String email) {
         int n = -1;
@@ -23,5 +28,11 @@ public class Database {
     public User getUser(int n)
     {
         return users.get(n);
+    }
+
+    public void CreateEvent (Events event)
+    {
+        events.add(event);
+        eventName.add(event.getEvent_name());
     }
 }

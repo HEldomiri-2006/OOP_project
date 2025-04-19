@@ -7,6 +7,7 @@ public abstract class  User {
     protected  String phonenumber;
     protected String email;
     protected LocalDate Dateofbirth;
+    protected IOoperations[] operations;
 
 
     public User() {
@@ -34,15 +35,6 @@ public abstract class  User {
     public String getEmail() {
         return email;
     }
-    public abstract void menu();
+    public abstract void menu(Database database , User user);
 
-    /*addRoom(roomID: int, roomCapacity: int, price: int): void
- +addCategories(categoryName: String): void
- +deleteCategories(categoryName: String): void
- +editCategories(old_categoryName: String, new_categoryName: String): void
- +view_allRooms(): List<Rooms>
- +view_allEvents():  List<Events>
- +view_allAttendees():  List<Attendees>
-
-     */
 }
