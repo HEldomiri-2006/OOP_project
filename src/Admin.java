@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Admin extends User {
 
@@ -9,13 +10,13 @@ public class Admin extends User {
         super(name);
         this.operations=new IOoperations[]
                 {
-                        new add_rooms(),
-                        new add_categories(),
-                        new delete_category(),
-                        new update_Category(),
-                        new view_all_rooms(),
-                        new view_all_events(),
-                        new view_all_attendies()
+                        new addRooms(),
+                        new addCategories(),
+                        new deleteCategory(),
+                        new updateCategory(),
+                        new viewAllRooms(),
+                        new viewAllEvents(),
+                        new viewAllAttendies()
                 };
     }
 
@@ -23,13 +24,13 @@ public class Admin extends User {
         super(name, phonenumber, email, DateofBirth);
         this.operations=new IOoperations[]
                 {
-                        new add_rooms(),
-                        new add_categories(),
-                        new delete_category(),
-                        new update_Category(),
-                        new view_all_rooms(),
-                        new view_all_events(),
-                        new view_all_attendies()
+                        new addRooms(),
+                        new addCategories(),
+                        new deleteCategory(),
+                        new updateCategory(),
+                        new viewAllRooms(),
+                        new viewAllEvents(),
+                        new viewAllAttendies()
                 };
     }
 
@@ -43,6 +44,10 @@ public class Admin extends User {
         System.out.println("5. view all rooms");
         System.out.println("6.view all events");
         System.out.println("7. view all attendies");
+
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        this.operations[n-1].opr(database, user);
 
     }
 }

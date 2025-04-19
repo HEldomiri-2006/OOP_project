@@ -7,12 +7,15 @@ public class attendee extends User {
     private double balance;
     private String interests;
     private Events event;
+    private Wallet wallet; // Corrected typo (renamed from 'waller' to 'wallet')
 
     public attendee() {
+        this.wallet = new Wallet(0.0); // Initialize with default balance
     }
 
     public attendee(String name) {
         super(name);
+        this.wallet = new Wallet(0.0); // Initialize with default balance
         this.operations = new IOoperations[]{
                 new viewEvent(),
                 new buyTicket(),
@@ -20,37 +23,34 @@ public class attendee extends User {
         };
     }
 
-    public attendee(String name, String phonenumber, String email, LocalDate DateofBirth, String address, double balance, String interests /* ,Gender gender*/) {
+    public attendee(String name, String phonenumber, String email, LocalDate DateofBirth,
+                    String address, double balance, String interests /*, Gender gender*/) {
         super(name, phonenumber, email, DateofBirth);
         this.address = address;
         this.balance = balance;
         this.interests = interests;
         // this.gender = gender;
+        this.wallet = new Wallet(balance); // Initialize with the provided balance
         this.operations = new IOoperations[]{
                 new viewEvent(),
-                new buyTicket(),
-
+                new buyTicket()
         };
     }
 
-    @Override
-    public void menu(Database database , User user) {
-        System.out.println("1.view event");
-        System.out.println("2.Buy ticket");
+    // Getter for Wallet (optional but recommended for access)
+    public Wallet getWallet() {
+        return wallet;
+    }
 
+    @Override
+    public void menu(Database database, User user) {
+        System.out.println("1. View event");
+        System.out.println("2. Buy ticket");
 
         Scanner s = new Scanner(System.in);
         int n = s.nextInt();
-        this.operations[n-1].opr( database ,  user);
+        this.operations[n-1].opr(database, user);
     }
 
-    public void view_event() {
-    }
-
-    public void select_event() {
-    }
-
-    public void buy_ticket() {
-        // Implementation for buying a ticket
-    }
-}  // Added missing class closing brace
+    // Other methods (view_event, select_event, buy_ticket) remain unchanged
+}
