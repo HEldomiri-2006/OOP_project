@@ -8,7 +8,7 @@ public class attendee extends User {
     private String interests;
     private Events event;
     private Wallet wallet;// Corrected typo (renamed from 'waller' to 'wallet')
-    private String password;
+
 
     public attendee() {
         this.wallet = new Wallet(0.0); // Initialize with default balance
