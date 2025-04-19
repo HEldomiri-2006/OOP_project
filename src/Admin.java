@@ -20,8 +20,8 @@ public class Admin extends User {
                 };
     }
 
-    public Admin(String name, String phonenumber, String email, LocalDate DateofBirth) {
-        super(name, phonenumber, email, DateofBirth);
+    public Admin(String name, String phonenumber, String email, LocalDate DateofBirth,String password) {
+        super(name, phonenumber, email, DateofBirth, password);
         this.operations=new IOoperations[]
                 {
                         new addRooms(),

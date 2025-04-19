@@ -7,7 +7,8 @@ public class attendee extends User {
     private double balance;
     private String interests;
     private Events event;
-    private Wallet wallet; // Corrected typo (renamed from 'waller' to 'wallet')
+    private Wallet wallet;// Corrected typo (renamed from 'waller' to 'wallet')
+    private String password;
 
     public attendee() {
         this.wallet = new Wallet(0.0); // Initialize with default balance
@@ -23,9 +24,8 @@ public class attendee extends User {
         };
     }
 
-    public attendee(String name, String phonenumber, String email, LocalDate DateofBirth,
-                    String address, double balance, String interests /*, Gender gender*/) {
-        super(name, phonenumber, email, DateofBirth);
+    public attendee(String name, String phonenumber, String email, LocalDate DateofBirth,String password,String address, double balance, String interests /*, Gender gender*/) {
+        super(name, phonenumber, email, DateofBirth,password);
         this.address = address;
         this.balance = balance;
         this.interests = interests;
@@ -41,6 +41,7 @@ public class attendee extends User {
     public Wallet getWallet() {
         return wallet;
     }
+
 
     @Override
     public void menu(Database database, User user) {

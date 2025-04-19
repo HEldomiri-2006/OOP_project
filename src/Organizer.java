@@ -21,8 +21,8 @@ public class Organizer extends User{
                 };
     }
 
-    public Organizer(String name, String phonenumber, String email, LocalDate DateofBirth) {
-        super(name, phonenumber, email, DateofBirth);
+    public Organizer(String name, String phonenumber, String email, LocalDate DateofBirth,String password) {
+        super(name, phonenumber, email, DateofBirth,password);
         this.operations=new IOoperations[]
                 {
                         new createEvent(),
