@@ -5,10 +5,10 @@ public class Admin extends User {
 
     public Admin() {
     }
-
+    //??????????????????????
     public Admin(String name) {
         super(name);
-        this.operations=new IOoperations[]
+        this.operations = new IOoperations[]
                 {
                         new addRooms(),
                         new addCategories(),
@@ -22,7 +22,7 @@ public class Admin extends User {
 
     public Admin(String name, String phonenumber, String email, LocalDate DateofBirth) {
         super(name, phonenumber, email, DateofBirth);
-        this.operations=new IOoperations[]
+        this.operations = new IOoperations[]
                 {
                         new addRooms(),
                         new addCategories(),

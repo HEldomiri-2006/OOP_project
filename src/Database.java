@@ -6,6 +6,8 @@ public class Database {
     ArrayList <String> name = new ArrayList<String>();
     ArrayList <Events> events = new ArrayList<Events>();
     ArrayList <String> eventName=new ArrayList<String>();
+    ArrayList <Room> rooms = new ArrayList<Room>();
+    ArrayList <Category> categories = new ArrayList<>();
 
 
     public void addUser(User s) {
