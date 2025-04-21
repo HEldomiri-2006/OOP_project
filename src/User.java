@@ -26,7 +26,7 @@ public abstract class  User {
         this.password=password;
     }
 
-    // Add these to your User class
+
     public int failedAttempts = 0;
 
     public void incrementFailedAttempts() {

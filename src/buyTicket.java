@@ -31,6 +31,7 @@ public class buyTicket implements IOoperations {
         // Proceed with valid input
         Events selectedEvent = database.events.get(eventChosen - 1);
         double price = selectedEvent.getPrice();
+        int eventid = selectedEvent.getEvent_id();
         System.out.println("Price: $" + price);
 
         attendee wa7ed = new attendee();
@@ -44,6 +45,10 @@ public class buyTicket implements IOoperations {
             {
                 balance=-price;
                 System.out.println("Ticket bought succesfully\nYour current balance is: " +balance );
+                database.addattendeecoming(wa7ed,eventid);
+
+                //here
+
             }
             else {
                 System.out.println("Not enough balance :(");
