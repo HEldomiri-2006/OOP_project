@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Room {
     private int roomId;
     private int roomCapacity;
+    private boolean occupied;
     Database Rooms;
     private double price;
     private Scanner scanner = new Scanner(System.in);
@@ -39,6 +40,10 @@ public class Room {
         this.roomCapacity = roomCapacity;
     }
 
+    public boolean getOccupied(){return occupied;}
+
+    public void setOccupied(boolean occupied){this.occupied = occupied;}
+
     public double getPrice() {
         return price;
     }
@@ -46,7 +51,6 @@ public class Room {
     public void setPrice(double price) {
         this.price = price;
     }
-//public boolean isAvailable()
 
 
 }

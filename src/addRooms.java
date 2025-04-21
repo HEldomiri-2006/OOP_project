@@ -4,20 +4,21 @@ public class addRooms implements IOoperations{
     @Override
     public void opr(Database database, User user) {
 
+        Scanner input = new Scanner(System.in);
+
         System.out.print("Enter room ID: ");
-        Scanner a = new Scanner(System.in);
-        int roomID = a.nextInt();
+        int roomID = input.nextInt();
 
         System.out.print("Enter room capacity: ");
-        Scanner b = new Scanner(System.in);
-        int roomCapacity = b.nextInt();
+        int roomCapacity = input.nextInt();
 
         System.out.print("Enter room price: ");
-        Scanner c = new Scanner(System.in);
-        Double price = c.nextDouble();
+        Double price = input.nextDouble();
 
         //object instance to use during array handling
-        Database db = new Database();
-        db.rooms.add(new Room(roomCapacity, roomID, price));
+        database.rooms.add(new Room(roomCapacity, roomID, price));
+        System.out.println("Room updated successfully");
+
+        input.close();
     }
 }
