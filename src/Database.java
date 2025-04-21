@@ -16,12 +16,24 @@ public class Database {
     }
 
 
-    public int login(String phonenumber , String email) {
+    public int login(String phonenumber, String email, String password) {
         int n = -1;
         for (User i : users) {
             if (i.phonenumber.matches(phonenumber) && i.email.matches(email)) {
-                n = users.indexOf(i);
-                break;
+                if (i.isLocked()) {
+                    System.out.println("Account locked due to too many failed attempts");
+                    return -2; // Special code for locked account
+                }
+
+                if (i.password.matches(password)) {
+                    i.resetFailedAttempts();
+                    n = users.indexOf(i);
+                    break;
+                } else {
+                    i.incrementFailedAttempts();
+                    System.out.println("Incorrect password. Attempts remaining: " + (5 - i.failedAttempts));
+                    return -1;
+                }
             }
         }
         return n;

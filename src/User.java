@@ -8,6 +8,7 @@ public abstract class  User {
     protected String email;
     protected LocalDate Dateofbirth;
     protected IOoperations[] operations;
+    protected String password;
 
 
     public User() {
@@ -17,11 +18,27 @@ public abstract class  User {
         this.name = name;
     }
 
-    public User(String name, String phonenumber, String email, LocalDate DateofBirth) {
+    public User(String name, String phonenumber, String email, LocalDate DateofBirth, String password) {
         this.name = name;
         this.phonenumber = phonenumber;
         this.email = email;
         this.Dateofbirth=DateofBirth;
+        this.password=password;
+    }
+
+    // Add these to your User class
+    public int failedAttempts = 0;
+
+    public void incrementFailedAttempts() {
+        failedAttempts++;
+    }
+
+    public void resetFailedAttempts() {
+        failedAttempts = 0;
+    }
+
+    public boolean isLocked() {
+        return failedAttempts >= 5;
     }
 
     public String getName() {

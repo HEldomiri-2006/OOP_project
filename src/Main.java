@@ -29,17 +29,34 @@ public class Main {
     }
 
     private static void login() {
-        System.out.println("enter your phone number :");
-        String phonenumber = s.nextLine();
-        System.out.println("enter your email: ");
-        String email = s.nextLine();
-        int n = database.login(phonenumber, email);
-        if (n != -1) {
-            User user = database.getUser(n);
-            System.out.println("welcome " + user.getName());
-            user.menu( database , user);
-        } else {
-            System.out.println("user does not exist");
+        int attempts = 0;
+        final int MAX_ATTEMPTS = 5;
+
+        while (attempts < MAX_ATTEMPTS) {
+            System.out.println("enter your phone number:");
+            String phonenumber = s.nextLine();
+            System.out.println("enter your email:");
+            String email = s.nextLine();
+            System.out.println("enter your password:");
+            String password = s.nextLine();
+
+            int n = database.login(phonenumber, email, password);
+
+            if (n == -2) { // Locked account
+                return; // Go back to main menu
+            } else if (n != -1) {
+                User user = database.getUser(n);
+                System.out.println("welcome " + user.getName());
+                user.menu(database, user);
+                return;
+            } else {
+                attempts++;
+                if (attempts < MAX_ATTEMPTS) {
+                    System.out.println("Login failed. Try again.");
+                } else {
+                    System.out.println("Too many failed attempts. Returning to main menu.");
+                }
+            }
         }
     }
 
@@ -50,6 +67,8 @@ public class Main {
         String phonenumber = s.nextLine();
         System.out.println("enter your email: ");
         String email = s.nextLine();
+        System.out.println("enter your password: ");
+        String password = s.nextLine();
 
         System.out.println("Enter your date of birth (YYYY-MM-DD format):");
         LocalDate dateOfBirth = null;
@@ -67,10 +86,10 @@ public class Main {
         s.nextLine(); // Consume the newline character
 
         if (role == 1) {
-             user = new Admin(name, phonenumber, email,dateOfBirth);
+             user = new Admin(name, phonenumber, email,dateOfBirth,password);
 
         } else if (role == 2) {
-             user = new Organizer(name, phonenumber, email,dateOfBirth);
+             user = new Organizer(name, phonenumber, email,dateOfBirth,password);
 
         } else {
             System.out.println("enter your address:");
@@ -81,11 +100,10 @@ public class Main {
             Double balance =s.nextDouble();
             //System.out.println("enter your gender");
 
-            user = new attendee(name, phonenumber, email,dateOfBirth,address,balance,intersts); // Fixed class name (attendee -> Attendee)
+            user = new attendee(name, phonenumber, email,dateOfBirth,password,address,balance,intersts); // Fixed class name (attendee -> Attendee)
 
         }
         database.addUser(user);
-        user.menu(database,user);
         System.out.println("user created successfully");
     }
 
