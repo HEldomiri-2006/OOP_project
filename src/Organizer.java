@@ -36,6 +36,8 @@ public class Organizer extends User{
 
 }
 
+
+
     @Override
     public void menu(Database database , User user) {
         System.out.println("1.create event");
