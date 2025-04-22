@@ -9,6 +9,7 @@ public class Room {
     Database Rooms;
     private double price;
     private Scanner scanner = new Scanner(System.in);
+    private boolean Occupied;
 
     public Room() {
     }
@@ -46,7 +47,16 @@ public class Room {
     public void setPrice(double price) {
         this.price = price;
     }
-//public boolean isAvailable()
+
+    public boolean getOccupied() {
+        return Occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        Occupied = occupied;
+    }
+
+    //public boolean isAvailable()
 
 
 }

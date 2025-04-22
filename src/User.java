@@ -9,6 +9,7 @@ public abstract class  User {
     protected LocalDate Dateofbirth;
     protected IOoperations[] operations;
     protected String password;
+    boolean currentloggedin= false;
 
 
     public User() {
@@ -54,4 +55,11 @@ public abstract class  User {
     }
     public abstract void menu(Database database , User user);
 
+    public boolean isCurrentloggedin() {
+        return currentloggedin;
+    }
+
+    public void setCurrentlog(boolean currentloggedin) {
+        this.currentloggedin = currentloggedin;
+    }
 }

@@ -11,8 +11,8 @@ public class rentRoom implements IOoperations{
             else{
                 System.out.println("Room is taken. Choose another room");
                 int newroomID = scanner.nextInt();
-                rentRoom(newroomID, event_id);
+                rentRoom(newroomID, event_id);*/
 
         }
     }
-}
+
