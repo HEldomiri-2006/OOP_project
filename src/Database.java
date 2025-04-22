@@ -5,6 +5,9 @@ public class Database {
     ArrayList <String> name = new ArrayList<String>();
     ArrayList <Events> events = new ArrayList<Events>();
     ArrayList <String> eventName=new ArrayList<String>();
+    ArrayList <Room> allRooms = new ArrayList<Room>();
+    ArrayList <Room> rentendRooms = new ArrayList<Room>();
+    ArrayList <Category> categories = new ArrayList<>();
     ArrayList <String> Attendeecoming = new ArrayList<String>();
     ArrayList <Integer> Attendeecomingid = new ArrayList<Integer>();
 
@@ -18,13 +21,22 @@ public class Database {
     public void addattendeecoming(User s , int eventid) {
         Attendeecoming.add(s.getName());
         Attendeecomingid.add(eventid);
-
-
     }
 
+    public void addrooms(Room room) {
+        allRooms.add(room);
+    }
 
+    public void addrentedrooms(Room rentedroom)
+    {
+        rentendRooms.add(rentedroom);
+    }
 
-
+    public void CreateEvent (Events event)
+    {
+        events.add(event);
+        eventName.add(event.getEvent_name());
+    }
 
     public int login(String phonenumber, String email, String password) {
         int n = -1;
@@ -38,6 +50,7 @@ public class Database {
                 if (i.password.matches(password)) {
                     i.resetFailedAttempts();
                     n = users.indexOf(i);
+                    i.setCurrentlog(true);
                     break;
                 } else {
                     i.incrementFailedAttempts();
@@ -53,14 +66,6 @@ public class Database {
     {
         return users.get(n);
     }
-
-    public void CreateEvent (Events event)
-    {
-        events.add(event);
-        eventName.add(event.getEvent_name());
-    }
-
-
 
     public boolean eventexistancecheck(int event_id) {
         for (int i = 0; i < events.size(); i++) {
@@ -80,6 +85,20 @@ public class Database {
             }
         }
         return -1;  // Explicit return if event not found
+    }
+
+    public void roomAvailability()
+    {
+        for(int i=0 ; i< allRooms.size();i++)
+        {
+            for (int j = 0 ; j< rentendRooms.size();j++)
+            {
+                if(allRooms.get(i).getRoomId()==rentendRooms.get(j).getRoomId())
+                {
+                    allRooms.get(i).setOccupied(true);
+                }
+            }
+        }
     }
 
 }
