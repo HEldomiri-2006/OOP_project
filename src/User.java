@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class  User {
@@ -9,8 +10,8 @@ public abstract class  User {
     protected LocalDate Dateofbirth;
     protected IOoperations[] operations;
     protected String password;
-    boolean currentloggedin= false;
-
+    boolean currentlyloggedin= false;
+    public ArrayList roomids = new ArrayList<Integer>();
 
     public User() {
     }
@@ -56,10 +57,10 @@ public abstract class  User {
     public abstract void menu(Database database , User user);
 
     public boolean isCurrentloggedin() {
-        return currentloggedin;
+        return currentlyloggedin;
     }
 
-    public void setCurrentlog(boolean currentloggedin) {
-        this.currentloggedin = currentloggedin;
+    public void setCurrentlog(boolean currentlyloggedin) {
+        this.currentlyloggedin = currentlyloggedin;
     }
 }

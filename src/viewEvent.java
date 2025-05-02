@@ -5,5 +5,6 @@ public class viewEvent implements IOoperations {
         for (Events e : database.events) {
             System.out.println(index++ + ". " + e.getEvent_name());
         }
+        database.setLogout(1);
     }
 }

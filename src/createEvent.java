@@ -6,19 +6,22 @@ public class createEvent implements IOoperations {
         Scanner s = new Scanner(System.in);
         Events event = new Events();
 
-        System.out.println("Enter event name:");
-        event.setEvent_name(s.next());
-        System.out.println("Enter event organizer:");
-        event.setEvent_organizer(s.next());
+        event.setEvent_name(InputHelper.getAlphabeticInput("Enter event name: "));
+        String wantedname = null;
+        for (int j = 0; j < database.users.size(); j++) {
+            if (database.users.get(j).currentlyloggedin){
+                wantedname = database.users.get(j).name;
+                break;
+            }
+        }
+        event.setEvent_organizer(wantedname);
         System.out.println("Enter event category:");
         event.setEvent_category(s.next());
-        System.out.println("Enter event price:");
-        event.setPrice(s.nextDouble());
+        event.setPrice(InputHelper.getDoubleIntegerInput("Enter event price: "));
 
         // Handle event ID with validation loop
         while (true) {
-            System.out.println("Enter event ID:");
-            int eventId = s.nextInt();
+            int eventId = InputHelper.getIntegerInput("Enter event ID: ");
 
             if (database.eventexistancecheck(eventId)) {
                 System.out.println("Event ID is taken. Please choose another ID.");
@@ -29,5 +32,6 @@ public class createEvent implements IOoperations {
                 break;  // Exit the loop when valid ID is provided
             }
         }
+        database.setLogout(1);
     }
 }

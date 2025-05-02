@@ -1,14 +1,20 @@
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputControl;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Database {
     ArrayList <User>users = new ArrayList<User>();
     ArrayList <String> name = new ArrayList<String>();
     ArrayList <Events> events = new ArrayList<Events>();
     ArrayList <String> eventName=new ArrayList<String>();
+    ArrayList <Room> allRooms = new ArrayList<>();
+    ArrayList<Room> rentedRooms =new ArrayList<>();
+    ArrayList <Category> categories = new ArrayList<>();
     ArrayList <String> Attendeecoming = new ArrayList<String>();
     ArrayList <Integer> Attendeecomingid = new ArrayList<Integer>();
-
-
+    int logout;
 
     public void addUser(User s) {
         users.add(s);
@@ -19,12 +25,25 @@ public class Database {
         Attendeecoming.add(s.getName());
         Attendeecomingid.add(eventid);
 
-
     }
 
+    public void addRooms(Room room)
+    {
+        allRooms.add(room);
+    }
 
+    public void addrentedRoom(Room room)
+    {
+        rentedRooms.add(room);
+    }
 
+    public int getLogout() {
+        return logout;
+    }
 
+    public void setLogout(int logout) {
+        this.logout = logout;
+    }
 
     public int login(String phonenumber, String email, String password) {
         int n = -1;
@@ -38,6 +57,7 @@ public class Database {
                 if (i.password.matches(password)) {
                     i.resetFailedAttempts();
                     n = users.indexOf(i);
+                    i.setCurrentlog(true);
                     break;
                 } else {
                     i.incrementFailedAttempts();
@@ -60,7 +80,19 @@ public class Database {
         eventName.add(event.getEvent_name());
     }
 
-
+    public void roomAvailability()
+    {
+        for(int i=0 ; i< allRooms.size();i++)
+        {
+            for (int j = 0 ; j< rentedRooms.size();j++)
+            {
+                if(allRooms.get(i).getRoomId()==rentedRooms.get(j).getRoomId())
+                {
+                    allRooms.get(i).setOccupied(true);
+                }
+            }
+        }
+}
 
     public boolean eventexistancecheck(int event_id) {
         for (int i = 0; i < events.size(); i++) {
@@ -81,5 +113,18 @@ public class Database {
         }
         return -1;  // Explicit return if event not found
     }
-
+    public int userexistancecheck(String email, String phonenumber, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            if (Objects.equals(users.get(i).getPhonenumber(), phonenumber)) {
+                return -1;
+            }
+            if (Objects.equals(users.get(i).getEmail(), email)){
+                return -2;
+            }
+            if(Objects.equals(users.get(i).password, password)){
+                return -3;
+            }
+        }
+        return -4;
+    }
 }

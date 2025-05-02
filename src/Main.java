@@ -8,10 +8,12 @@ public class Main {
 
     public static void main(String[] args) {
         int num;
+        DummyDataLoader.populate(database);
+        DummyDataLoader.loadUsers(database);
+        DummyDataLoader.loadEvents(database);
+        DummyDataLoader.loadRooms(database);
         do {
-            System.out.println("Welcome to our event manager \n choose: \n 1.login \n 2.Register \n 0.exit");
-            num = s.nextInt();
-            s.nextLine(); // Consume the newline character
+            num = InputHelper.getIntegerInput("\nWelcome to our event manager \n choose: \n 1.Login \n 2.Register \n 0.Exit\n Your choice: ");
 
             switch (num) {
                 case (1):
@@ -23,7 +25,7 @@ public class Main {
                 case (0):
                     break;
                 default:
-                    System.out.println("Error");
+                    System.out.println("Invalid");
             }
         } while (num != 0);
     }
@@ -33,11 +35,11 @@ public class Main {
         final int MAX_ATTEMPTS = 5;
 
         while (attempts < MAX_ATTEMPTS) {
-            System.out.println("enter your phone number:");
+            System.out.println("Enter your phone number:");
             String phonenumber = s.nextLine();
-            System.out.println("enter your email:");
+            System.out.println("Enter your email:");
             String email = s.nextLine();
-            System.out.println("enter your password:");
+            System.out.println("Enter your password:");
             String password = s.nextLine();
 
             int n = database.login(phonenumber, email, password);
@@ -46,8 +48,44 @@ public class Main {
                 return; // Go back to main menu
             } else if (n != -1) {
                 User user = database.getUser(n);
-                System.out.println("welcome " + user.getName());
-                user.menu(database, user);
+                System.out.println("\nWelcome " + user.getName());
+                do{
+                    user.menu(database, user);
+                } while(database.logout!=0);
+                return;
+            } else {
+                attempts++;
+                if (attempts < MAX_ATTEMPTS) {
+                    System.out.println("Login failed. Try again.");
+                } else {
+                    System.out.println("Too many failed attempts. Returning to main menu.");
+                }
+            }
+        }
+    }
+
+    private static void login(String enteredphonenumber, String enteredemail, String enteredpass) {
+        int attempts = 0;
+        final int MAX_ATTEMPTS = 5;
+
+        while (attempts < MAX_ATTEMPTS) {
+            System.out.println("Enter your phone number:");
+            String phonenumber = s.nextLine();
+            System.out.println("Enter your email:");
+            String email = s.nextLine();
+            System.out.println("Enter your password:");
+            String password = s.nextLine();
+
+            int n = database.login(phonenumber, email, password);
+
+            if (n == -2) { // Locked account
+                return; // Go back to main menu
+            } else if (n != -1) {
+                User user = database.getUser(n);
+                System.out.println("\nWelcome " + user.getName());
+                do{
+                    user.menu(database, user);
+                } while(database.logout!=0);
                 return;
             } else {
                 attempts++;
@@ -61,14 +99,12 @@ public class Main {
     }
 
     private static void newUser() {
-        System.out.println("enter your name:");
-        String name = s.nextLine();
-        System.out.println("enter your phone number :");
-
+        String name = InputHelper.getAlphabeticInput("\nEnter your name: ");
+        System.out.println("Enter your phone number :");
         String phonenumber = s.nextLine();
-        System.out.println("enter your email: ");
+        System.out.println("Enter your email: ");
         String email = s.nextLine();
-        System.out.println("enter your password: ");
+        System.out.println("Enter your password: ");
         String password = s.nextLine();
 
         System.out.println("Enter your date of birth (YYYY-MM-DD format):");
@@ -81,10 +117,8 @@ public class Main {
             }
         }
 
-        System.out.println("1.Admin \n2.Organizer \n3.attendee");
-        int role = s.nextInt();
+        int role =InputHelper.getIntegerInput("\n1.Admin \n2.Organizer \n3.attendee\nYour choice: ");
         User user;
-        s.nextLine(); // Consume the newline character
 
         if (role == 1) {
              user = new Admin(name, phonenumber, email,dateOfBirth,password);
@@ -93,19 +127,27 @@ public class Main {
              user = new Organizer(name, phonenumber, email,dateOfBirth,password);
 
         } else {
-            System.out.println("enter your address:");
+            System.out.println("\nEnter your address: ");
             String address = s.nextLine();
-            System.out.println("enter your intersts");
+            System.out.println("Enter your interests: ");
             String intersts = s.nextLine();
-            System.out.println("enter balance");
-            Double balance =s.nextDouble();
+            Double balance = InputHelper.getDoubleIntegerInput("Enter balance: ");
             //System.out.println("enter your gender");
 
             user = new attendee(name, phonenumber, email,dateOfBirth,password,address,balance,intersts); // Fixed class name (attendee -> Attendee)
 
         }
         database.addUser(user);
-        System.out.println("user created successfully");
+        System.out.println("User created successfully");
+        int z = database.login(phonenumber, email, password);
+        if(z != -1) {
+            User user2 = database.getUser(z);
+            System.out.println("\nWelcome " + user2.getName());
+            do{
+                user2.menu(database, user2);
+            } while(database.logout!=0);
+            return;
+        }
     }
 
 }

@@ -15,7 +15,7 @@ public class buyTicket implements IOoperations {
             System.out.println("Enter the event number (or 0 to cancel): ");
             eventChosen = scanner.nextInt();
 
-            // Allow cancellation (optional)
+            // Allow cancellation
             if (eventChosen == 0) {
                 System.out.println("Cancelled.");
                 return;
@@ -23,7 +23,7 @@ public class buyTicket implements IOoperations {
 
             // Validate input
             if (eventChosen >= 1 && eventChosen <= database.events.size()) {
-                break; // Exit loop if valid
+                break;
             }
             System.out.println("Invalid number! Please try again.");
         }
@@ -34,32 +34,45 @@ public class buyTicket implements IOoperations {
         int eventid = selectedEvent.getEvent_id();
         System.out.println("Price: $" + price);
 
-        attendee wa7ed = new attendee();
-        double balance = wa7ed.getWallet().getBalance();
+        // Check if user is an attendee (who can buy tickets)
+        if (!(user instanceof attendee)) {
+            System.out.println("Only attendees can buy tickets!");
+            return;
+        }
+
+        // Since we know it's an attendee, we can cast safely
+        attendee attendeeUser = (attendee) user;
+
+        // Get attendee's balance (assuming attendee has getBalance() directly)
+        double balance = attendeeUser.getWallet().getBalance(); // Changed from getWallet().getBalance()
 
         System.out.println("Do you want to buy a ticket (Yes/No)");
-        String input = scanner.nextLine().toLowerCase();
-        if (input == "yes")
-        {
-            if(balance>price)
-            {
-                balance=-price;
-                System.out.println("Ticket bought succesfully\nYour current balance is: " +balance );
-                database.addattendeecoming(wa7ed,eventid);
+        String input = scanner.next().toLowerCase();
 
-                //here
+        if (input.equals("yes")) {
+            if (balance >= price) {
+                // Deduct price from attendee's balance
+                attendeeUser.getWallet().setBalance(balance - price);
 
-            }
-            else {
+                // Find the organizer and add the money to their wallet
+                String organizerName = selectedEvent.getEvent_organizer();
+                for (User orgUser : database.users) {
+                    if (orgUser instanceof Organizer && orgUser.getName().equals(organizerName)) {
+                        Organizer organizer = (Organizer) orgUser;
+                        double orgBalance = organizer.getWallet().getBalance();
+                        organizer.getWallet().setBalance(orgBalance + price);
+                        //System.out.println("The new balance of organizer: " + organizer.getName() + " is "+ organizer.getWallet().getBalance());
+                        break;
+                    }
+                }
+
+                System.out.println("Ticket bought successfully!\nYour current balance is: " + attendeeUser.getWallet().getBalance());
+                database.addattendeecoming(attendeeUser, eventid);
+            } else {
                 System.out.println("Not enough balance :(");
             }
-
+        } else {
+            System.out.println("Purchase cancelled.");
         }
-        else {
-            System.out.println("Thanks for checking out bye!");
-        }
-
-
-
     }
 }

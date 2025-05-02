@@ -1,9 +1,12 @@
+import java.util.Date;
+
 public class Events {
     private String event_name;
     private String event_organizer;
     private String event_category;
     private int event_id;
     private double price;
+
 
     public Events() {
     }
@@ -14,6 +17,7 @@ public class Events {
         this.event_category = event_category;
         this.event_id = event_id;
         this.price = price;
+
     }
 
     public String toString()

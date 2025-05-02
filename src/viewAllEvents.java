@@ -10,7 +10,7 @@ public class viewAllEvents implements IOoperations{
         boolean validCategory = false;
 
         while(!validCategory){
-            System.out.print("Enter desired categories (enter all for all categories): ");
+            System.out.print("Enter desired categories (enter \"all\" to view all categories): ");
             eventCategory = input.next().toLowerCase();
 
             if(eventCategory.toLowerCase().equals("all")){
@@ -50,7 +50,6 @@ public class viewAllEvents implements IOoperations{
                         event.getPrice());
             }
         }
-
-        input.close();
+        database.setLogout(1);
     }
 }

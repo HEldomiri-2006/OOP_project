@@ -32,8 +32,9 @@ public class attendee extends User {
         // this.gender = gender;
         this.wallet = new Wallet(balance); // Initialize with the provided balance
         this.operations = new IOoperations[]{
-                new viewEvent(),
-                new buyTicket()
+                new viewEventGUI(),
+                new buyTicket(),
+                new Exit()
         };
     }
 
@@ -45,11 +46,9 @@ public class attendee extends User {
 
     @Override
     public void menu(Database database, User user) {
-        System.out.println("1. View event");
-        System.out.println("2. Buy ticket");
 
         Scanner s = new Scanner(System.in);
-        int n = s.nextInt();
+        int n = InputHelper.getIntegerInput("\n1. View event\n2. Buy ticket\n3. Exit\nYour choice: ");
         this.operations[n-1].opr(database, user);
     }
 

@@ -16,7 +16,6 @@ public class deleteCategory implements IOoperations{
         } else {
             System.out.println("No category with the name '" + delete + "' was found.");
         }
-
-        input.close();
+        database.setLogout(1);
     }
 }

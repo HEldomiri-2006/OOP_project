@@ -5,8 +5,7 @@ public class deleteEvent implements IOoperations {
     public void opr(Database database, User user) {
         Scanner s =new Scanner(System.in);
 
-        System.out.println("enter the event id you want to remove: ");
-        int event_id=s.nextInt();
+        int event_id=InputHelper.getIntegerInput("enter the event id you want to remove: ");
 
 
             if (!database.eventexistancecheck(event_id)) {
@@ -16,5 +15,6 @@ public class deleteEvent implements IOoperations {
                 database.events.remove(database.whichevent(event_id));
                 System.out.println("Event deleted successfully");
             }
+            database.setLogout(1);
         }
 }

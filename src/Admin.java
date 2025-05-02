@@ -16,7 +16,8 @@ public class Admin extends User {
                         new updateCategory(),
                         new viewAllRooms(),
                         new viewAllEvents(),
-                        new viewAllAttendies()
+                        new viewAllAttendies(),
+                        new Exit()
                 };
     }
 
@@ -30,23 +31,17 @@ public class Admin extends User {
                         new updateCategory(),
                         new viewAllRooms(),
                         new viewAllEvents(),
-                        new viewAllAttendies()
+                        new viewAllAttendies(),
+                        new Exit()
                 };
     }
 
 
     @Override
     public void menu(Database database , User user) {
-        System.out.println("1.add rooms");
-        System.out.println("2.add categories");
-        System.out.println("3.delete category");
-        System.out.println("4.update category");
-        System.out.println("5. view all rooms");
-        System.out.println("6.view all events");
-        System.out.println("7. view all attendies");
 
         Scanner s = new Scanner(System.in);
-        int n = s.nextInt();
+        int n = InputHelper.getIntegerInput("\n1. Add rooms\n2. Add categories\n3. Delete category\n4. Update category\n5. View all rooms\n6. View all events\n7. View all attendees\n8. Exit\n");
         this.operations[n-1].opr(database, user);
 
     }

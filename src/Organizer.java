@@ -1,37 +1,41 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Organizer extends User{
+private Wallet wallet;
 
-
-    public Organizer() {
-    }
+    public Organizer() {}
 
    public Organizer(String name) {
         super(name);
+       this.wallet = new Wallet(0.0);
         this.operations=new IOoperations[]
                 {
                         new createEvent(),
                         new editEvent(),
                         new deleteEvent(),
-                        new viewAvailableRooms(),
                         new rentRoom(),
                         new viewCreatedEvents(),
-                        new viewAttendees()
+                        new viewAttendees(),
+                        new Exit()
                 };
     }
-
+    public Wallet getWallet() {
+        return wallet;
+    }
     public Organizer(String name, String phonenumber, String email, LocalDate DateofBirth,String password) {
         super(name, phonenumber, email, DateofBirth,password);
+        this.wallet = new Wallet(0.0);
         this.operations=new IOoperations[]
                 {
                         new createEvent(),
                         new editEvent(),
                         new deleteEvent(),
-                        new viewAvailableRooms(),
                         new rentRoom(),
                         new viewCreatedEvents(),
-                        new viewAttendees()
+                        new viewAttendees(),
+                        new Exit()
                 };
 
 }
@@ -40,16 +44,9 @@ public class Organizer extends User{
 
     @Override
     public void menu(Database database , User user) {
-        System.out.println("1.create event");
-        System.out.println("2.edit event");
-        System.out.println("3.delete event");
-        System.out.println("4.view available Rooms");
-        System.out.println("5.rentRoom");
-        System.out.println("6.view created Events"); //lessa msh akid
-        System.out.println("7. view Attendees"); // lessa msh akid
 
         Scanner s = new Scanner(System.in);
-        int n = s.nextInt();
+        int n = InputHelper.getIntegerInput("\n1. Create event\n2. Edit event\n3. Delete event\n4. Rent Room\n5. View created Events\n6. View Attendees\n7. Exit\n");
         this.operations[n-1].opr(database, user);
     }
 
